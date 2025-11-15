@@ -6,7 +6,7 @@ ORDER BY nom_commune ASC;
 
 
 
--- bonus : par voie
+-- Bonus : par voie
 
 SELECT c.nom_commune, v.nom_voie, COUNT(*) AS nombre_adresse
 FROM adresse a

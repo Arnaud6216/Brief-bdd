@@ -1,3 +1,4 @@
+-- Mise à jour par l'id_fantoir
 UPDATE voie v
 SET nom_voie = 'Quartier commerçant',
     nom_afnor = 'QUARTIER COMMERCANT'
