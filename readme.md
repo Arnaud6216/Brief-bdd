@@ -24,10 +24,10 @@ Represents the official name of a street (via FANTOIR) and can belong to several
 **✦ Position**  
 Stores geographic coordinates; it is separated to avoid repeating the same coordinates across several records.
 
-**✦ Address**  
+**✦ Addresse**  
 Central entity linking: number, street, commune, and position.
 
-**✦ Parcel**  
+**✦ Parcelle**  
 Independent entity because an address can be linked to several cadastral parcels, and a parcel can contain several addresses.
 This requires an N,N relationship, hence the associative table adresse_parcelle.
 
@@ -54,7 +54,7 @@ All required SQL queries for the exercise are gathered in the folder:
 
 ## 5. ⚡ Optimization and Analysis
 
-Inside the Optimization and analysis folder, you will find:
+Inside the **Optimisation et analyse** folder, you will find:
 - The script to create indexes on the most frequently used fields (create_index.sql).
 - A performance analysis before and after indexing, using several queries (explain_analyse.sql).
 
@@ -117,7 +117,7 @@ Toutes les requêtes demandées dans l’exercice sont regroupées dans le dossi
 
 ## 5. ⚡ Optimisation et analyse
 
-Dans le dossier "Optimisation et analyse" se trouvent :
+Dans le dossier **Optimisation et analyse** se trouvent :
 - Le script pour la création des index sur les champs les plus sollicités (create_index.sql).
 - Une analyse des performances avant et après indexation via plusieurs requêtes (explain_analyse.sql).
 
