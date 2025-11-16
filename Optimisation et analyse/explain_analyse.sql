@@ -139,3 +139,8 @@ Test 4
 
 Test 5
 933.71 ms -> 519.43 ms / gain de 414.28 ms(44% plus rapide)
+
+-- Globalement, l'indexation a permis d'améliorer significativement les performances des requêtes,
+-- à l'exception de la troisième requête où une légère dégradation a été observée. 
+-- Cela souligne l'importance de choisir judicieusement les index en fonction des requêtes les plus fréquentes.
+
