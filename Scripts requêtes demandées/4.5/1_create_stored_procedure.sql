@@ -10,7 +10,7 @@ CREATE OR REPLACE FUNCTION create_or_update_adress(
     p_code_postal VARCHAR,
     p_code_insee VARCHAR,
     p_nom_commune VARCHAR,
-    p_code_insee_ancienne_adresse VARCHAR,
+    p_code_insee_ancienne_commune VARCHAR,
     p_nom_ancienne_commune VARCHAR,
     p_x DECIMAL,
     p_y DECIMAL,
@@ -40,7 +40,7 @@ BEGIN
 
     -- Insertion ou mise à jour de la table commune
     INSERT INTO commune(code_insee, code_postal, nom_commune, code_insee_ancienne_commune, nom_ancienne_commune, libelle_acheminement, certification_commune)
-    VALUES(p_code_insee, p_code_postal, p_nom_commune, p_code_insee_ancienne_adresse, p_nom_ancienne_commune, p_libelle_acheminement, p_certification_commune)
+    VALUES(p_code_insee, p_code_postal, p_nom_commune, p_code_insee_ancienne_commune, p_nom_ancienne_commune, p_libelle_acheminement, p_certification_commune)
     ON CONFLICT (code_insee) DO UPDATE SET
         code_postal = EXCLUDED.code_postal,
         nom_commune = EXCLUDED.nom_commune,
