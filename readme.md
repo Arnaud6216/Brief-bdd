@@ -3,28 +3,62 @@
 This project consists of modeling, cleaning, structuring, and optimizing a PostgreSQL database based on the National Address Database (BAN), the official reference containing more than 26 million French addresses.
 
 
-## 🐳 Installation with Docker
+## Requirements
 
-To simplify the installation and management of the PostgreSQL database, this project uses Docker. This allows you to quickly run an isolated PostgreSQL instance without installing PostgreSQL locally.
+To run this project, you need :  
+- Docker   
+- Docker Compose   
+- DBeaver (or another database management tool)  
+- CSV file from the National Address Database (BAN)
 
-**The project includes a docker-compose.yml file configured to:**
-- Use the official PostgreSQL 18+ image.
-- Set the user, password, and database name (POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB — the values are hardcoded for this exercise, but it’s better to use a .env file).
-- Map the local port (e.g., 5433) to the PostgreSQL port in the container (5432) (port 5433 was used because 5432 was already in use on my computer).
-- Persist data in a local volume so that tables and data are retained even after stopping the container.
 
-**To start the container:**  
-Open a terminal and type the command :  
-docker-compose up -d
+## 🐳 Docker Installation
 
-**Importing data and running SQL scripts:**  
-In DBeaver, right-click on the database, then select New SQL Script and execute the various scripts provided in the project (table creation, test data insertion, raw data import, requested queries, etc.).
+This project uses Docker to simplify the installation and management of the PostgreSQL database, allowing you to quickly run an isolated instance without installing PostgreSQL locally.
+
+
+### Configuration with .env
+
+1. Copy the example file `.env.example` to `.env` :
+
+2. Fill in the values according to your local setup :
+
+- `POSTGRES_USER : PostgreSQL username`  
+- `POSTGRES_PASSWORD : PostgreSQL password`  
+- `POSTGRES_DB : database name`  
+- `POSTGRES_PORT : local port to access PostgreSQL`
+
+
+### Steps to launch the database with automatic data import :
+
+1. Make sure you have the CSV file from the Base Adresse Nationale for your department.
+
+2. Rename it to `raw_data.csv` and place it in the project’s data/ folder.
+
+3. Open a terminal and run :  
+`docker-compose up -d`
+
+**The container will :**
+
+- Automatically create all the tables.
+- Import the data from `raw_data.csv`.
+- Execute the transformation script to populate the normalized tables.
+
+
+### Connect to the Database
+
+Connect via DBeaver or another PostgreSQL client using : 
+
+`Host: localhost`  
+`Port: <POSTGRES_PORT from .env, ex. 5432>`  
+`Database: <POSTGRES_DB>`  
+`Username: <POSTGRES_USER>`  
+`Password: <POSTGRES_PASSWORD>`
 
 
 ## 1. 📥 Data Exploration
 
 I used the file from the Doubs department (25) for this exercise.  
-After importing it through DBeaver, I obtained a table containing the raw CSV data.  
 This first step allowed me to explore the structure, data types, missing values, and potential duplicates.
 
 
@@ -42,7 +76,7 @@ Represents the official name of a street (via FANTOIR) and can belong to several
 **✦ Position**  
 Stores geographic coordinates; it is separated to avoid repeating the same coordinates across several records.
 
-**✦ Addresse**  
+**✦ Adresse**  
 Central entity linking: number, street, commune, and position.
 
 **✦ Parcelle**  
@@ -73,8 +107,8 @@ All required SQL queries for the exercise are gathered in the folder:
 ## 5. ⚡ Optimization and Analysis
 
 Inside the **Optimisation et analyse** folder, you will find:
-- The script to create indexes on the most frequently used fields (create_index.sql).
-- A performance analysis before and after indexing, using several queries (explain_analyse.sql).
+- The script to create indexes on the most frequently used fields (`create_index.sql`).
+- A performance analysis before and after indexing, using several queries (`explain_analyse.sql`).
 
 The analyses show that indexes generally provide a significant reduction in query cost and execution time.
 
@@ -85,28 +119,58 @@ The analyses show that indexes generally provide a significant reduction in quer
 Ce projet consiste à modéliser, nettoyer, structurer et optimiser une base de données PostgreSQL à partir de la Base Adresse Nationale (BAN), la référence officielle contenant plus de 26 millions d’adresses françaises.
 
 
+## Prérequis
+
+Pour exécuter ce projet, vous devez avoir les éléments suivants installés sur votre système :
+- Docker  
+- Docker Compose  
+- DBeaver (ou autre outil de base de données)  
+- Fichier CSV de la Base Adresse Nationale (BAN)
+
+
 ## 🐳 Installation avec Docker
 
 Pour faciliter l’installation et la gestion de la base PostgreSQL, ce projet utilise Docker. Cela permet de lancer rapidement une instance PostgreSQL isolée sans avoir à installer PostgreSQL localement.
 
-**Le projet contient un fichier docker-compose.yml configuré pour :**
-- Utiliser l’image officielle PostgreSQL 18+.
-- Définir l’utilisateur, le mot de passe et le nom de la base de données (POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB / les valeurs sont en dur pour l'exercice mais il vaut mieux utiliser un fichier .env).
-- Mapper le port local (ex. 5433) vers le port PostgreSQL du conteneur (5432) (j'ai utilisé le port 5433 car le 5432 était déjà utilisé sur mon ordinateur).
-- Persister les données dans un volume local afin que les tables et les données soient conservées même après l’arrêt du conteneur.
+### Configuration avec .env
 
-**Pour lancer le conteneur :**   
-Ouvrir un terminal et taper la commande :   
-docker-compose up -d
+1. Copiez le fichier `.env.example` en `.env` :
 
-**Importer les données et exécuter les scripts SQL :**  
-Dans DBeaver, faites un clic droit sur la base, puis Nouveau script SQL et exécutez les différents scripts fournis dans le projet (création des tables, insertion des données de test, import des données brutes, requêtes demandées, etc.).
+2. Remplissez les valeurs selon votre configuration locale :
+- `POSTGRES_USER : nom d’utilisateur PostgreSQL`
+- `POSTGRES_PASSWORD : mot de passe PostgreSQL`
+- `POSTGRES_DB : nom de la base de données`
+- `POSTGRES_PORT : port local pour accéder à PostgreSQL`
+
+### Étapes pour lancer la base avec import automatique :
+
+1. Assurez-vous d’avoir le fichier CSV de la Base Adresse Nationale pour votre département.
+
+2. Renommez-le en `raw_data.csv` et placez-le dans le dossier data/ du projet.
+
+3. Ouvrez un terminal et exécutez :  
+`docker-compose up -d`
+
+**Le conteneur :**
+
+- Créera automatiquement toutes les tables.
+- Importera les données depuis `raw_data.csv`.
+- Exécutera le script de transformation pour remplir les tables normalisées.
+
+### Connexion à la base
+
+Connectez-vous via DBeaver ou un autre client PostgreSQL sur :  
+
+`Host: localhost`  
+`Port: <POSTGRES_PORT défini dans .env, ex. 5432>`  
+`Database: <POSTGRES_DB>`  
+`Username: <POSTGRES_USER>`  
+`Password: <POSTGRES_PASSWORD>`
 
 
 ## 1. 📥 Découverte de la donnée
 
 J’ai utilisé pour cet exercice le fichier du département du Doubs (25).  
-Après importation via **DBeaver**, j’ai obtenu une table contenant les données brutes du CSV.  
 Cette première étape m’a permis d’explorer la structure, les types de données, les valeurs manquantes et les éventuels doublons.  
 
 
@@ -141,7 +205,7 @@ Entité indépendante car une adresse peut être rattachée à plusieurs parcell
 Deux autres scripts pour la création d'une table jeu_essai et l'insertion de 100 lignes issues du fichier CSV :  
 **📂 Script jeu d’essai**
 
-Enfin, un script permet d’importer la totalité des données brutes du fichier CSV dans la base normalisée (réutilisable sur d'autres fichiers CSV) :  
+Enfin, un script permet d’importer la totalité des données brutes du fichier CSV dans la base normalisée :  
 **📂 Script import des données brutes**
 
 
@@ -154,7 +218,7 @@ Toutes les requêtes demandées dans l’exercice sont regroupées dans le dossi
 ## 5. ⚡ Optimisation et analyse
 
 Dans le dossier **Optimisation et analyse** se trouvent :
-- Le script pour la création des index sur les champs les plus sollicités (create_index.sql).
-- Une analyse des performances avant et après indexation via plusieurs requêtes (explain_analyse.sql).
+- Le script pour la création des index sur les champs les plus sollicités (`create_index.sql`).
+- Une analyse des performances avant et après indexation via plusieurs requêtes (`explain_analyse.sql`).
 
 Les analyses montrent que les index permettent, dans la majorité des cas, une réduction notable du coût et du temps d’exécution des requêtes.
