@@ -1,0 +1,13 @@
+services:
+  brief-bdd:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: arno123
+      POSTGRES_DB: gouv
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgresql_data:/var/lib/postgresql
+volumes: 
+  postgresql_data:

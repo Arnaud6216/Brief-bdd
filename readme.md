@@ -3,6 +3,24 @@
 This project consists of modeling, cleaning, structuring, and optimizing a PostgreSQL database based on the National Address Database (BAN), the official reference containing more than 26 million French addresses.
 
 
+## 🐳 Installation with Docker
+
+To simplify the installation and management of the PostgreSQL database, this project uses Docker. This allows you to quickly run an isolated PostgreSQL instance without installing PostgreSQL locally.
+
+**The project includes a docker-compose.yml file configured to:**
+- Use the official PostgreSQL 18+ image.
+- Set the user, password, and database name (POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB — the values are hardcoded for this exercise, but it’s better to use a .env file).
+- Map the local port (e.g., 5433) to the PostgreSQL port in the container (5432) (port 5433 was used because 5432 was already in use on my computer).
+- Persist data in a local volume so that tables and data are retained even after stopping the container.
+
+**To start the container:**  
+Open a terminal and type the command :  
+docker-compose up -d
+
+**Importing data and running SQL scripts:**  
+In DBeaver, right-click on the database, then select New SQL Script and execute the various scripts provided in the project (table creation, test data insertion, raw data import, requested queries, etc.).
+
+
 ## 1. 📥 Data Exploration
 
 I used the file from the Doubs department (25) for this exercise.  
@@ -65,6 +83,24 @@ The analyses show that indexes generally provide a significant reduction in quer
 # 🧭 Base Adresses Nationales (BAN) — Projet PostgreSQL
 
 Ce projet consiste à modéliser, nettoyer, structurer et optimiser une base de données PostgreSQL à partir de la Base Adresse Nationale (BAN), la référence officielle contenant plus de 26 millions d’adresses françaises.
+
+
+## 🐳 Installation avec Docker
+
+Pour faciliter l’installation et la gestion de la base PostgreSQL, ce projet utilise Docker. Cela permet de lancer rapidement une instance PostgreSQL isolée sans avoir à installer PostgreSQL localement.
+
+**Le projet contient un fichier docker-compose.yml configuré pour :**
+- Utiliser l’image officielle PostgreSQL 18+.
+- Définir l’utilisateur, le mot de passe et le nom de la base de données (POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB / les valeurs sont en dur pour l'exercice mais il vaut mieux utiliser un fichier .env).
+- Mapper le port local (ex. 5433) vers le port PostgreSQL du conteneur (5432) (j'ai utilisé le port 5433 car le 5432 était déjà utilisé sur mon ordinateur).
+- Persister les données dans un volume local afin que les tables et les données soient conservées même après l’arrêt du conteneur.
+
+**Pour lancer le conteneur :**   
+Ouvrir un terminal et taper la commande :   
+docker-compose up -d
+
+**Importer les données et exécuter les scripts SQL :**  
+Dans DBeaver, faites un clic droit sur la base, puis Nouveau script SQL et exécutez les différents scripts fournis dans le projet (création des tables, insertion des données de test, import des données brutes, requêtes demandées, etc.).
 
 
 ## 1. 📥 Découverte de la donnée
