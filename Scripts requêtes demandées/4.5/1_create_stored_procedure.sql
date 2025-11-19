@@ -7,15 +7,15 @@ CREATE OR REPLACE FUNCTION create_or_update_adress(
     p_numero INT,
     p_rep VARCHAR,
     p_nom_voie VARCHAR,
-    p_code_postal VARCHAR,
-    p_code_insee VARCHAR,
+    p_code_postal INT,
+    p_code_insee    INT,
     p_nom_commune VARCHAR,
-    p_code_insee_ancienne_commune VARCHAR,
+    p_code_insee_ancienne_commune INT,
     p_nom_ancienne_commune VARCHAR,
-    p_x DECIMAL,
-    p_y DECIMAL,
-    p_lon DECIMAL,
-    p_lat DECIMAL,
+    p_x FLOAT,
+    p_y FLOAT,
+    p_lon FLOAT,
+    p_lat FLOAT,
     p_type_position VARCHAR,
     p_alias VARCHAR,
     p_nom_ld VARCHAR,
@@ -105,6 +105,10 @@ BEGIN
 
 END;
 $$ LANGUAGE plpgsql;
+
+-- correction rapide suite à la review de Clément, requête qui ne fonctionnait pas en l'état
+ALTER TABLE parcelle 
+ADD CONSTRAINT parcelle_cad_parcelles_unique UNIQUE (cad_parcelles);
 
 --------------------------------------------------------------
 ------------------ REQUETE TEST CREATION ---------------------

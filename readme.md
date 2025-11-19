@@ -35,7 +35,7 @@ This project uses Docker to simplify the installation and management of the Post
 
 2. Rename it to `raw_data.csv` and place it in the project’s data/ folder.
 
-3. Open a terminal and run :  
+3. Open a terminal, go to the project folder and run :  
 `docker-compose up -d`
 
 **The container will :**
@@ -148,7 +148,7 @@ Pour faciliter l’installation et la gestion de la base PostgreSQL, ce projet u
 
 2. Renommez-le en `raw_data.csv` et placez-le dans le dossier data/ du projet.
 
-3. Ouvrez un terminal et exécutez :  
+3. Ouvrez un terminal, se placer dans le dossier du projet et exécutez :  
 `docker-compose up -d`
 
 **Le conteneur :**

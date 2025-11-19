@@ -14,10 +14,10 @@ CREATE TABLE voie (
 
 CREATE TABLE position (
     id_position SERIAL PRIMARY KEY,
-    x DECIMAL(22,15),
-    y DECIMAL(22,15),
-    lon DECIMAL(18,15),
-    lat DECIMAL(17,15),
+    x FLOAT,
+    y FLOAT,
+    lon FLOAT,
+    lat FLOAT,
     type_position VARCHAR(50),
     source_position VARCHAR(50)
 );
@@ -28,10 +28,10 @@ CREATE TABLE parcelle (
 );
 
 CREATE TABLE commune (
-    code_insee VARCHAR(5) primary key,
-    code_postal VARCHAR(5),
+    code_insee INT primary key,
+    code_postal INT,
     nom_commune VARCHAR(50),
-    code_insee_ancienne_commune VARCHAR(5),
+    code_insee_ancienne_commune INT,
     nom_ancienne_commune VARCHAR(50),
     libelle_acheminement VARCHAR(50),
     certification_commune INT
@@ -45,7 +45,7 @@ CREATE TABLE adresse (
     nom_ld VARCHAR(255),
     id_voie VARCHAR(20) REFERENCES voie(id_fantoir),
     id_position INT REFERENCES position(id_position),
-    id_commune VARCHAR(5) REFERENCES commune(code_insee)
+    id_commune INT REFERENCES commune(code_insee)
 );
 
 CREATE TABLE adresse_parcelle (

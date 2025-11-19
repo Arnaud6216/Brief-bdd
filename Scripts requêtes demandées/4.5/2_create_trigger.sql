@@ -75,5 +75,5 @@ VALUES(6.0234, 47.2378, 6.0234, 47.2378, 'entrée', 'cadastre');
 
 -- Test 6 : Code postaux valides ✅
 INSERT INTO commune(code_insee, code_postal, nom_commune, code_insee_ancienne_commune, nom_ancienne_commune, libelle_acheminement, certification_commune)
-VALUES('25414', '25000', 'Besançon' , NULL, NULL, 'BESANCON', 1);
+VALUES('62252', '62136', 'La couture' , NULL, NULL, 'LA COUTURE', 1);
 -- OK
